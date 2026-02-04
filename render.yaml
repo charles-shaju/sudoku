@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: sudoku
+    env: python
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+    startCommand: gunicorn sudoku_project.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: sudoku_project.settings
+      - key: PYTHONUNBUFFERED
+        value: "1"
